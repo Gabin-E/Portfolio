@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau</title>
+    <link rel="stylesheet" href="css/tableau.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+ 
+ <!---------------------Html du tableau------------------>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>email</th>
+        <th>mot de passe</th>
+        <th>role</th>
+        <th>Organisation</th>
+        <th>Actions</th> 
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Marc</td>
+        <td>exemple@gmail.com</td>
+        <td>testtest</td>
+        <td>Admin</td>
+        <td>Gdbdemo</td>
+        <td>
+            <button  onclick="window.location.href = 'modification.html';"class="button" role="button">
+                Modifier
+            </button>
+            <button class="button" role="button">
+                Effacer
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>André</td>
+        <td>utilisateur@gmail.com</td>
+        <td>1234test</td>
+        <td>Utilisateur</td>
+        <td>SociéterTest</td>
+        <td>
+            <button onclick="window.location.href = 'modification.html';" role="button">
+                Modifier
+        </button>
+            <button class="button" role="button">
+                Effacer
+            </button>
+        </td>
+    </tr>
+    </table>
+
+    
+<!---------------------menu de navigation------------------>
+<div class="side-nav" id="sideNav">
+            <img class="content" src="img/template_images_Factoria-logo.webp" height="65">
+            <hr>
+            <div class="content-box3">
+                <a href="connexion.html" class="button" role="button">CONNEXION</a>
+            </div>
+            <div class="content-box3">
+                <a href="test-visu copy.html" class="button" role="button">GRAPHIQUES</a>
+            </div>
+            <div class="content-box3" id="hide-nav-button">
+                <a class="button-86" role="button"> MASQUER </a>
+            </div>
+            <div class="content-box3">
+                <a href="connexion.html" class="button" role="button">DECONNEXION</a>
+            </div>
+            <hr>
+            <div class="content-box3">
+                <a href="mailto:contact@factoria-groupe.fr" class="button" role="button">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
+        
+           
+            <div class="content-box3">
+                <a href="tel:02 51 89 63 89" class="button" role="button">
+                    <i class="fas fa-phone"></i> Téléphone
+                </a>
+            </div>
+        </div>
+        
+        </div>
+        <div class="content-box2" id="show-nav-button" style="display: none;">
+            <button class="button2" role="button">Afficher le menu</button>
+        </div>
+    
+        <!---------------------Script pour la page ------------------>
+        
+        <script src="js/index.js"></script>
+       
+    </div>
+</body>
+</html>

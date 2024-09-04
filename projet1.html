@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- =====BOX ICONS===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <title>Mon Projet</title>
+    </head>
+    <body>
+        <!--===== HEADER =====-->
+        <header class="l-header">
+            <nav class="nav bd-grid">
+                <div>
+                    <a href="#" class="nav__logo">Gabin</a>
+                </div>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                        <li class="nav__item"><a href="index.html#about" class="nav__link">Présentation</a></li>
+                        <li class="nav__item"><a href="index.html#skills" class="nav__link">Skills</a></li>
+                        <li class="nav__item"><a href="index.html#work" class="nav__link">Projet</a></li>
+                        <li class="nav__item"><a href="index.html#contact" class="nav__link">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+
+        <main class="l-main">
+            <!--===== PROJECT =====-->
+            <section class="project section" id="project">
+                <h2 class="section-title">Mon stage</h2>
+
+                <div class="project__container bd-grid">
+                    <div class="project__img">
+                        <img src="img/OIP.jpg" alt="Image du projet" width="200">
+                    </div>
+                    
+                    <div>
+                        <h2 class="project__subtitle">Dérouler de mon stage chez GDB nantes</h2>
+                        <p class="project__text">Lors de mon stage, j'ai eu une mission principale et plusieurs tâches à côté de cette mission. La mission principale consistait à créer un portail BI dans un site.
+                            Internet afin que des clients puissent voir des graphiques en lien avec l'utilisation du logiciel DocuWare qui permet de dématérialiser les factures… <br>Cet outil avait donc pour objectif d'analyser les statistiques sur les factures et d'en faire des graphiques. Tout ça visible dans un portail web.
+                        </p><a href="projet-stage/index.html"> lien vers le portail web</a><br>
+                        <p class="project__text">Je me suis occupé du front pendant qu'un autre développeur lui s'est occupé du back (le lien vers le portail web est une démonstration du front utilisé pour celui-ci).</p>
+                        <br>
+                        <p class="project__text">Pendant se stage j'ai découvert les API, qui est une fonctionnalitée que je ne connaissait pas. Elle fonctionne avec des requêtes, j'ai donc appris a me servir des api de DocuWare grâce au logiciel postman et la bibliotèque de requête fourni par DocuWare.<br>
+                        Avec ces api j'ai crée une extension looker studio qui est le logiciel BI de Google qui permet de se connecter au cloud d'une organisation DocuWare et de récuperer des informations sur les données présente dans le cloud.</p>
+                        <p><a href="https://script.google.com/u/2/home/projects/1qPB6tpNS0UcFByXA2u3ysOubHVk_OHY9qldhP0vPf-OuZSnVN-7aodq8/edit">Lien vers l'extension</a></p>
+                        <br>
+                        
+                        <p class="project__text">Plusieurs tâches m'ont été attribuées pendant ce stage, comme la réalisation d'une application en csharp en lien avec docuware. Cette application devait consister à convertir un fichier Excel stocké dans le cloud en un fichier PDF, malheureusement, par manque de temps, je n'ai pas pu finir. Ci dessous le code</p>
+                        <br>
+                        <br>   <div class="code-box">
+                            <pre>
+                    <code>
+                        using System;
+                        using System.IO;
+                        using System.Linq;
+                        using System.Windows.Forms;
+                        using OfficeOpenXml;
+                        using PdfSharp.Drawing;
+                        using PdfSharp.Pdf;
+                        using DocuWare.Platform.ServerClient;
+                        using System.Collections.Generic;
+                        
+                        namespace LogicielDocuWare
+                        {
+                            public partial class Form1 : Form
+                            {
+                                public Form1()
+                                {
+                                    InitializeComponent();
+                                }
+                        
+                                static Uri uri = new Uri("https://gdbdemo.docuware.cloud/DocuWare/Platform");
+                        
+                                public static ServiceConnection Connect()
+                                {
+                                    return ServiceConnection.Create(uri, "GdBDemo", "GdBDemo2019");
+                                }
+                        
+                                private void btnConvert_Click(object sender, EventArgs e)
+                                {
+                                    try
+                                    {
+                                        // Connect to DocuWare
+                                        ServiceConnection connection = Connect();
+                                        lblStatus.Text = "Connexion réussie à DocuWare";
+                        
+                                        // Récupérer l'organisation et le cabinet de fichiers
+                                        var org = connection.Organizations[0];
+                                        var fileCabinets = org.GetFileCabinetsFromFilecabinetsRelation().FileCabinet;
+                        
+                                        // Récupérer l'ID du cabinet renseigné
+                                        string fileCabinetId = "votre_cabinet_id_renseigne"; // Remplacez "votre_cabinet_id_renseigne" par l'ID de votre cabinet renseigné
+                        
+                                        // Récupérer le cabinet correspondant
+                                        var cabinetCorrespondant = fileCabinets.FirstOrDefault(fc => fc.Id == fileCabinetId);
+                        
+                                        if (cabinetCorrespondant != null)
+                                        {
+                                            // Récupérer les dialogues associés au cabinet de fichiers
+                                            var dialogs = cabinetCorrespondant.GetDialogsFromFileCabinet().Dialogs;
+                                            var searchDialog = dialogs.FirstOrDefault(d => d.Type == DialogType.Search);
+                        
+                                            if (searchDialog != null)
+                                            {
+                                                // Créer une requête pour obtenir les documents avec le statut "à convertir"
+                                                var query = new DialogExpression()
+                                                {
+                                                    Operation = DialogExpressionOperation.And,
+                                                    Condition = new List<DialogExpressionCondition>
+                                                    {
+                                                        DialogExpressionCondition.Create(fieldName: "statut", value: "à convertir")
+                                                    },
+                                                    SortOrder = new List<SortedField>
+                                                    {
+                                                        SortedField.Create("DWWBDOCNAME", SortDirection.Desc)
+                                                    }
+                                                };
+                        
+                                                // Exécuter la requête pour obtenir les documents avec le statut "à convertir"
+                                                var documentsQueryResult = connection.PostToDialogExpressionRelationForDocumentsQueryResult(searchDialog, query);
+                        
+                                                // Traiter les documents récupérés
+                                                foreach (var doc in documentsQueryResult.Items)
+                                                {
+                                                    // Récupérer le contenu du document Excel
+                                                    var docContent = doc.GetDocumentContent();
+                        
+                                                    // Convertir le document Excel en PDF
+                                                    using (MemoryStream excelStream = new MemoryStream(docContent.Content))
+                                                    {
+                                                        using (ExcelPackage package = new ExcelPackage(excelStream))
+                                                        {
+                                                            ExcelWorkbook workbook = package.Workbook;
+                                                            ExcelWorksheet worksheet = workbook.Worksheets.FirstOrDefault();
+                        
+                                                            if (worksheet != null)
+                                                            {
+                                                                string pdfPath = Path.Combine(Path.GetTempPath(), $"{doc.Title}.pdf");
+                        
+                                                                using (PdfDocument pdf = new PdfDocument())
+                                                                {
+                                                                    PdfPage pdfPage = pdf.AddPage();
+                                                                    XGraphics graph = XGraphics.FromPdfPage(pdfPage);
+                        
+                                                                    for (int row = 1; row <= worksheet.Dimension.End.Row; row++)
+                                                                    {
+                                                                        for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
+                                                                        {
+                                                                            var cellValue = worksheet.Cells[row, col].Text;
+                                                                            graph.DrawString(cellValue, new XFont("Verdana", 10), XBrushes.Black,
+                                                                                             new XRect(10 + col * 50, 10 + row * 20, pdfPage.Width, pdfPage.Height),
+                                                                                             XStringFormats.TopLeft);
+                                                                        }
+                                                                    }
+                        
+                                                                    pdf.Save(pdfPath);
+                                                                }
+                        
+                                                                // Remplacer le document Excel par le PDF dans DocuWare
+                                                                byte[] pdfBytes = File.ReadAllBytes(pdfPath);
+                                                                doc.ReplaceDocumentContent(pdfBytes, "application/pdf");
+                        
+                                                                // Mettre à jour l'index "statut" pour indiquer que la conversion est terminée
+                                                                var indexFields = doc.GetIndexFields();
+                                                                var statutField = indexFields.FirstOrDefault(f => f.FieldName == "statut");
+                                                                if (statutField != null)
+                                                                {
+                                                                    statutField.Item = "converti";
+                                                                }
+                                                                doc.UpdateDocument(indexFields);
+                        
+                                                                // Supprimer le fichier temporaire PDF
+                                                                File.Delete(pdfPath);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                        
+                                                lblStatus.Text = "Conversion terminée";
+                                            }
+                                            else
+                                            {
+                                                lblStatus.Text = "Aucun dialogue de recherche trouvé pour le cabinet spécifié.";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            lblStatus.Text = "Aucun cabinet correspondant trouvé avec l'ID renseigné.";
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        lblStatus.Text = "Erreur : " + ex.Message;
+                                    }
+                                }
+                            }
+                        }
+                    </code>
+                </pre>
+            </div>
+<br>
+                        <p class="project__text">Une autre tâche que j'ai effectué a été de prendre en main le logiciel DocuWare afin de mieux comprendre comment celui-ci fonctionnait pour ensuite créer mon site et mon application. J'ai donc effectué un exercice de formation qui a consisté à créer un environnement pour une entreprise qui va lui permettre de dématérialiser ces factures, avec une base de donnée que l'ont appel armoire ou on va stocker nos boites de dialogue qui elle permet de trier les dossiers. Par exemple, une boite de dialogue facture fournisseur servira à stocker les factures fournisseur avec tous les détails nécessaires.<br>Dans ce même exercice, j'ai créé un suivi automatique où les factures étaient affectées à des tâches comme à saisir ou à valider. J'ai donc à l'aide d'un workflow automatisé ceci (le workflow est une solution low-code).</p>
+           
+                    
+   <br>
+                     <p class="project__text">J'ai assisté a des Réunion avec des clients qui souhaitaient changer certain aspect de leurs organisation dans le logiciel, de changer des process de traitement des factures, ou encore acheter des fonctionnalitée que proposée l'entreprise ou j'étais. Ceci m'a permis de voir comment se déroulais le suivi de la clientelle plusieris années après la mise en place de la dématerialisation des dossier de l'entreprise.
+                            <br>J'ai également assisté a des réunion avec d'autres collaborateur a propos des dossiers en cours, de leurs avancement, la gestion des erreurs mais égalementdes tickets envoyer par les clients a propos des différentes erreur.
+                        </p>
+                    </div>                                   
+                </div>
+            </section>
+        </main>
+
+        <!--===== FOOTER =====-->
+        <footer class="footer">
+            <p class="footer__title">Gabin</p>
+            <div class="footer__social">
+                <a href="#" class="footer__icon"><i class='bx bxl-facebook' ></i></a>
+                <a href="#" class="footer__icon"><i class='bx bxl-instagram' ></i></a>
+                <a href="https://www.twitch.tv/perzoosss" class="footer__icon"><i class='bx bxl-twitch' ></i></a>
+            </div>
+        </footer>
+
+        <!--===== SCROLL REVEAL =====-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!--===== MAIN JS =====-->
+        <script src="js/main.js"></script>
+    </body>
+</html>

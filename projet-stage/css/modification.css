@@ -1,0 +1,200 @@
+body {
+    background-image:url("SL-120722-54440-04.jpg") ;
+    background-size: cover;
+    background-position: center;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.signup-container {
+    width: 400px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.signup-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: 10px;
+}
+
+.signup-button {
+    font-weight: bold;
+    color: white;
+    background-color: #171717;
+    padding: 1em 2em;
+    border: none;
+    border-radius: .6rem;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    width: 100%;
+}
+
+.signup-button span:not(:nth-child(6)) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 30px;
+    width: 30px;
+    background-color: #0c66ed;
+    border-radius: 50%;
+    transition: .6s ease;
+}
+
+.signup-button span:nth-child(6) {
+    position: relative;
+}
+
+.signup-button span:nth-child(1) {
+    transform: translate(-3.3em, -4em);
+}
+
+.signup-button span:nth-child(2) {
+    transform: translate(-6em, 1.3em);
+}
+
+.signup-button span:nth-child(3) {
+    transform: translate(-.2em, 1.8em);
+}
+
+.signup-button span:nth-child(4) {
+    transform: translate(3.5em, 1.4em);
+}
+
+.signup-button span:nth-child(5) {
+    transform: translate(3.5em, -3.8em);
+}
+
+.signup-button:hover span:not(:nth-child(6)) {
+    transform: translate(-50%, -50%) scale(4);
+    transition: 1.5s ease;
+}
+
+.side-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 190px;
+    background-color: #343a40;
+    color: white;
+    padding: 1rem;
+    transition: width 0.3s, opacity 0.3s;
+    background-image: linear-gradient(to bottom, #0daae9, #005a7f); 
+}
+
+.side-nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.content-box {
+    margin-top: 1rem;
+}
+
+.content {
+    display: block;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.content-box2 {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.content-box2 p {
+    margin: 0;
+}
+
+.side-nav-transition {
+    transition: width 0.3s, opacity 0.3s;
+}
+
+.side-nav-collapsed {
+    width: 0;
+    opacity: 0;
+}
+
+.show-nav-button {
+    display: none;
+}
+
+
+.button2 {
+    opacity: 70%;
+    --accent: fuchsia;
+    
+    letter-spacing: 0.1em;
+    border: none;
+    border-radius: 1.1em;
+    background-color: #212121;
+    cursor: pointer;
+    color: white;
+    padding: 0.5em 1.5em;
+    transition: box-shadow ease-in-out 0.3s, background-color ease-in-out 0.1s, letter-spacing ease-in-out 0.1s, transform ease-in-out 0.1s;
+}
+
+.button2:hover {
+    box-shadow: var(--hover-shadows);
+}
+
+.button2:active {
+    box-shadow: var(--hover-shadows), var(--accent) 0px 0px 20px 3px;
+    background-color: var(--accent);
+    transform: scale(0.95);
+}
+
+
+a {
+color: #fff8f8;
+line-height: 2;
+position: relative;
+font-size: large;
+font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+font-weight: 500;
+opacity: 85%;
+}
+
+a::before {
+content: '';
+width: 0;
+height: 3px;
+border-radius: 2px;
+background-color: #4a5569;
+position: absolute;
+bottom: -.25rem;
+left: 0;
+transition: width .4s;
+}
+
+a:hover::before {
+width: 100%;
+}
