@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="css/connexion.css">
+   
+
+</head>
+<body>
+
+    <!---------------------Menu de navigation------------------>
+
+    <div class="side-nav" id="sideNav">
+        <img class="content" src="img/template_images_Factoria-logo.webp" height="65">
+        <hr>
+        <div class="content-box">
+            <a href="connexion.html" class="button" role="button">CONNEXION</a>
+        </div>
+        <div class="content-box">
+            <a href="index.html" class="button" role="button">GRAPHIQUES</a>
+        </div>
+        <div class="content-box" id="hide-nav-button">
+            <a class="button-86" role="button"> MASQUER </a>
+        </div>
+        <div class="content-box">
+            <a href="connexion.html" class="button" role="button">DECONNEXION</a>
+        </div>
+        <hr>
+        <div class="content-box">
+            <a href="mailto:contact@factoria-groupe.fr" class="button" role="button">
+                <i class="fas fa-envelope"></i> Email
+            </a>
+        </div>
+    
+        
+        <div class="content-box">
+            <a href="tel:02 51 89 63 89" class="button" role="button">
+                <i class="fas fa-phone"></i> Téléphone
+            </a>
+        </div>
+    </div>
+    <div class="content-box2" id="show-nav-button" style="display: none;">
+        <button class="button-86" role="button">Afficher le menu</button>
+    </div>
+
+    <!---------------------Script de la page ------------------>
+
+    <script src="js/connexion.js"></script>
+   
+
+    <!---------------------Html du formulaire de connexion------------------>
+
+    <div class="login-container">
+        <h2 class="login-heading">Connexion</h2>
+    
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe">
+            </div>
+            
+            <button type="submit" class="login-button">Se connecter</button>
+        </form>
+    </div>
+</body>
+</html>
