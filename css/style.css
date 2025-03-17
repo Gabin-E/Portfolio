@@ -289,10 +289,10 @@ img {
   border-radius: 0.5rem;
   z-index: var(--z-back);
 }
-.skills__html {
-  width: 95%;
+.skills__java {
+  width: 60%;
 }
-.skills__css {
+.skills__php {
   width: 85%;
 }
 .skills__js {
